@@ -1,17 +1,24 @@
 {
-  "name": "electron-react",
+  "name": "omise-client",
   "version": "0.1.0",
   "private": true,
+  "main": "electron/electron-starter.js",
+  "homepage": "./",
   "dependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "asar": "^0.14.5",
+    "electron-packager": "^12.2.0"
   },
   "scripts": {
+    "build:css": "postcss src/styles/styles.css -o src/index.css",
+    "watch:css": "postcss src/styles/styles.css -o src/index.css -w",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build:all": "npm-run-all -p build:css build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "dev": "npm-run-all --parallel watch:css electron start",
+    "package": "npm run build:all && electron-packager . omise-client --platform=linux --arch=x64 --prune --out=release --overwrite"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +28,17 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "autoprefixer": "^9.3.1",
+    "cssnano": "^4.1.7",
+    "electron": "^3.0.10",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^6.0.1",
+    "postcss-import": "^12.0.1",
+    "postcss-nested": "^4.1.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1"
+  }
 }
